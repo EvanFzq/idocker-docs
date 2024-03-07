@@ -1,0 +1,44 @@
+---
+lastUpdated: true
+---
+# 快速开始
+
+## 安装
+
+可使用下面两种方式进行安装
+### 使用`docker`安装
+使用终端执行下面命令（注意修改host配置文件路径）
+```
+docker run --name idocker -d -p 3580:3580 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/idocker evanfzq/idocker:latest
+```
+### 使用 `docker-compose`安装
+
+到宿主机对应文件目录下使用下面命令创建文件夹及`docker-compose.yml`文件
+```shell
+mkdir idocker
+cd idocker
+touch docker-compose.yml
+```
+使用`vim`或其他工具修改 `docker-compose.yml`文件如下，配置文件路径请自定义
+```yml
+version: "3" # 表示该docker-compose.yml文件使用的是Version 3  
+services:  # 为project定义服务
+  idocker:  # 指定服务名称
+    container_name: idocker # 指定容器名
+    image: evanfzq/idocker:latest  # 指定服务所使用的镜像
+    ports:  # 暴露端口信息
+      - 3580:3580
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # 与docker宿主通信的 sock 地址，勿修改
+      - /host/file/path:/idocker # 服务配置文件存放的地方，请修改为自己的磁盘路径
+```
+在`docker-compose.yml`文件所在文件夹下执行下列命令启动服务
+```shell
+docker-compose up -d 
+```
+
+## 初始账户密码
+服务启动后查看容器日志输出，也可以在`/idocker`对应的主机目录下的`logs`文件夹找到`init-password.txt`文件，内有初始密码
+![](screenshots/init-account.jpg)
+
+初始帐号默认为`admin`，初始密码为随机八位字符串，帐号和密码可在网页端进行修改
