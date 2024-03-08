@@ -1,7 +1,7 @@
 {
   "name": "idocker-docs",
   "version": "0.0.1",
-  "description": "A VuePress project",
+  "description": "idocker文档",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -18,5 +18,10 @@
   },
   "dependencies": {
     "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
