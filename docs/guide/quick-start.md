@@ -1,17 +1,21 @@
 ---
 lastUpdated: true
+order: 2
 ---
 # 快速开始
+## 一、环境要求
+需服务器安装有`docker`服务。[如何安装docker](https://www.runoob.com/docker/ubuntu-docker-install.html)
 
-## 安装
+对于群晖`Nas`在套件中心中安装`Container Manager`套件即可
+## 二、安装
 
 可使用下面两种方式进行安装
-### 使用`docker`安装
-使用终端执行下面命令（注意修改host配置文件路径）
+### 2.1 使用`docker`安装
+使用终端执行下面命令（注意修改`host`配置文件路径）
 ```
 docker run --name idocker -d -p 3580:3580 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/idocker evanfzq/idocker:latest
 ```
-### 使用 `docker-compose`安装
+### 2.2 使用 `docker-compose`安装
 
 到宿主机对应文件目录下使用下面命令创建文件夹及`docker-compose.yml`文件
 ```shell
@@ -37,8 +41,9 @@ services:  # 为project定义服务
 docker-compose up -d 
 ```
 
-## 初始账户密码
+## 三、初始账户密码
 服务启动后查看容器日志输出，也可以在`/idocker`对应的主机目录下的`logs`文件夹找到`init-password.txt`文件，内有初始密码
-![](screenshots/init-account.jpg)
+![初始密码](screenshots/init-account.jpg)
 
 初始帐号默认为`admin`，初始密码为随机八位字符串，帐号和密码可在网页端进行修改
+

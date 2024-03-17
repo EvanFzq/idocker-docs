@@ -7,9 +7,9 @@ actions:
     link: /guide/quick-start.html
     type: primary
 
-  # - text: 功能配置
-  #   link: https://vuejs.press/guide/introduction.html
-  #   type: secondary
+  - text: 沟通反馈
+    link: /others/communicate
+    type: default
 
 features:
   - title: PC/移动端兼容
