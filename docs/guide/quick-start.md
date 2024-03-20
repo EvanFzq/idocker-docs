@@ -42,7 +42,7 @@ docker-compose up -d
 ```
 
 ## 三、初始账户密码
-服务启动后查看容器日志输出，也可以在`/idocker`对应的主机目录下的`logs`文件夹找到`init-password.txt`文件，内有初始密码
+服务启动后查看容器日志输出，也可以在`/idocker`对应的宿主机目录下的`logs`文件夹找到`init-password.txt`文件，内有初始密码
 ![初始密码](screenshots/init-account.jpg)
 
 初始帐号默认为`admin`，初始密码为随机八位字符串，帐号和密码可在网页端进行修改
