@@ -13,7 +13,7 @@ order: 2
 ### 2.1 使用`docker`安装
 使用终端执行下面命令（注意修改`host`配置文件路径）
 ```
-docker run --name idocker -d -p 3580:3580 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/idocker evanfzq/idocker:latest
+docker run --name idocker -d -p 3580:3580 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/idocker evanfzq/idocker:latest 
 ```
 ### 2.2 使用 `docker-compose`安装
 
