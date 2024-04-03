@@ -53,6 +53,14 @@ order: 5
 * `.go`
 * `.c`
 * `.sh`
-* `.rs`,
+* `.rs`
+* `.log`
+* `.conf`
+* `.types`
+* `.bat`
+* `.sql`
+* `.properties`
+* `.env`
+* `.plist`
   
 其中多数格式支持语法高亮
