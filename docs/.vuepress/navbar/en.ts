@@ -14,7 +14,14 @@ export const enNavbar = navbar([
       "safe.md",
     ],
   },
-  "/en/changelog.html",
+  {
+    text: "Changelog",
+    prefix: "/changelog/",
+    children: [
+      { text: "Latest", link: "latest.md" },
+      { text: "Beta", link: "beta.md" },
+    ],
+  },
   {
     text: "Others",
     prefix: "/en/others/",

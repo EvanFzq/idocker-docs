@@ -14,7 +14,14 @@ export const zhNavbar = navbar([
       "safe.md",
     ],
   },
-  "/changelog.html",
+  {
+    text: "更新日志",
+    prefix: "/changelog/",
+    children: [
+      { text: "正式版", link: "latest.md" },
+      { text: "测试版", link: "beta.md" },
+    ],
+  },
   {
     text: "其他",
     prefix: "/others/",

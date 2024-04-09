@@ -6,9 +6,26 @@ title: 安全
 ## 一、https
 未防止页面在网络中明文传输遭到劫持攻击，从而泄露用户账户和密码，外网访问`iDocker`时应使用`https`进行连接。 [什么是http劫持](https://www.zhihu.com/question/620860158)
 
-目前`iDocker`尚未开启`https`服务，未来将更新实现，目前可在服务器上部署`nginx`实现`https`访问，然后转发`http`请求到`iDocker`
 ::: warning
 `iDocker`在登录时会对密码进行含盐加密后再传到后台服务，可一定程度上降低密码泄露的风险，但由于加密逻辑在网页上，仍可以分析出加密方式导致密码泄露
+:::
+
+可直接通过`3543`端口访问`iDocker`的`https`服务，也可在服务器上部署`nginx`实现`https`访问，然后转发`http`请求到`iDocker`的`3580`端口
+
+::: tip 提示
+`iDocker`默认`https`证书为自签名证书，浏览器会提示警告，如下图：
+
+![Https Error](./screenshots/https-error.png)
+
+可点击【高级】按钮继续访问。
+:::
+### 1.1 更换证书
+如果用户有`CA`机构签名的证书，可以将`iDocker`默认的自签名证书修改为`CA`证书
+
+`iDocker`默认证书保存在`/docker/idocker/ssl`（容器内路径）文件下
+
+::: tip 提示
+请将`CA`证书的`key`文件名修改为默认的`idocker.key`，密钥文件修改为默认的`idocker.pem`，否则，服务将无法启动
 :::
 
 ## 二、异常登录通知
