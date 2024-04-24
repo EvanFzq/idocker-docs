@@ -17,11 +17,11 @@ order: 2
 
 host网络在安装应用时可以直接推测出内网访问地址
 ```
-docker run --name idocker -d --net=host -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
+docker run --name idocker -d --net=host --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
 ```
 #### `Bridge`网络
 ```
-docker run --name idocker -d -p 3580:3580 -p 3543:3543 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
+docker run --name idocker -d --restart=always -p 3580:3580 -p 3543:3543 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
 ```
 ### 2.2 使用 `docker-compose`安装
 #### `host` 网络(推荐)
@@ -42,6 +42,7 @@ services:  # 为project定义服务
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # 与docker宿主通信的 sock 地址，勿修改
       - /host/file/path:/docker # 所有docker服务配置文件存放的地方，请修改为自己的磁盘路径
+    restart: always
 ```
 在`docker-compose.yml`文件所在文件夹下执行下列命令启动服务
 ```shell
@@ -55,12 +56,18 @@ services:  # 为project定义服务
   idocker:  # 指定服务名称
     container_name: idocker # 指定容器名
     image: evanfzq/idocker:latest  # 指定服务所使用的镜像
+    networks:
+      - idocker-network
     ports:  # 暴露端口信息
       - 3580:3580  # WebUI http
       - 3543:3543 # WebUI https
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # 与docker宿主通信的 sock 地址，勿修改
       - /host/file/path:/docker # 所有docker服务配置文件存放的地方，请修改为自己的磁盘路径
+    restart: always
+networks:
+  idocker-network:
+    driver: bridge
 ```
 ::: info
 安装完成后，浏览器打开地址：`http://[服务器IP]:3580` 或`https://[服务器IP]:3543`即可访问
