@@ -17,11 +17,11 @@ order: 2
 
 host网络在安装应用时可以直接推测出内网访问地址
 ```
-docker run --name idocker -d --net=host --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
+docker run --name idocker -d --net=host --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker -v /:/host evanfzq/idocker:latest 
 ```
 #### `Bridge`网络
 ```
-docker run --name idocker -d --restart=always -p 3580:3580 -p 3543:3543 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker evanfzq/idocker:latest 
+docker run --name idocker -d --restart=always -p 3580:3580 -p 3543:3543 -v /var/run/docker.sock:/var/run/docker.sock -v /host/file/path:/docker -v /:/host evanfzq/idocker:latest 
 ```
 ### 2.2 使用 `docker-compose`安装
 #### `host` 网络(推荐)
@@ -42,6 +42,7 @@ services:  # 为project定义服务
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # 与docker宿主通信的 sock 地址，勿修改
       - /host/file/path:/docker # 所有docker服务配置文件存放的地方，请修改为自己的磁盘路径
+      - /:/host # 宿主根路径，方便通过idocker管理宿主机的文件，可选
     restart: always
 ```
 在`docker-compose.yml`文件所在文件夹下执行下列命令启动服务
@@ -64,6 +65,7 @@ services:  # 为project定义服务
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # 与docker宿主通信的 sock 地址，勿修改
       - /host/file/path:/docker # 所有docker服务配置文件存放的地方，请修改为自己的磁盘路径
+      - /:/host # 宿主根路径，方便通过idocker管理宿主机的文件，可选
     restart: always
 networks:
   idocker-network:
@@ -72,8 +74,12 @@ networks:
 ::: info
 安装完成后，浏览器打开地址：`http://[服务器IP]:3580` 或`https://[服务器IP]:3543`即可访问
 :::
+::: tip
+上述容器安装映射了根路径/，是为了方便通过idocker管理宿主机的文件，如果不需要可以删除
+:::
 ## 三、初始账户密码
 服务启动后查看容器日志输出，也可以在`/docker/idocker`对应的宿主机目录下的`logs`文件夹找到`init-password.txt`文件，内有初始密码
+
 ![初始密码](screenshots/init-account.jpg)
 
 初始帐号默认为`admin`，初始密码为随机八位字符串，帐号和密码可在网页端进行修改

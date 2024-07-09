@@ -4,7 +4,7 @@ title: 安全
 ---
 # 安全
 ## 一、https
-未防止页面在网络中明文传输遭到劫持攻击，从而泄露用户账户和密码，外网访问`iDocker`时应使用`https`进行连接。 [什么是http劫持](https://www.zhihu.com/question/620860158)
+为防止页面在网络中明文传输遭到劫持攻击，从而泄露用户账户和密码，外网访问`iDocker`时应使用`https`进行连接。 [什么是http劫持](https://www.zhihu.com/question/620860158)
 
 ::: warning
 `iDocker`在登录时会对密码进行含盐加密后再传到后台服务，可一定程度上降低密码泄露的风险，但由于加密逻辑在网页上，仍可以分析出加密方式导致密码泄露
@@ -35,10 +35,13 @@ title: 安全
 :::
 
 ::: tip 提示
-如果使用了`nginx`进行反向代理，可在转发路径增加下面请求头，这样`iDocker`才能拿到真实的用户`IP`，以便进行流量控制和`IP`封禁
+如果使用了`nginx`进行反向代理，可在转发路径增加下面请求头，这样`iDocker`才能拿到真实的用户`IP`和建立socket链接，以便进行流量控制和`IP`封禁和链接终端
 ```
   location / {
     ...
+    proxy_set_header Host $host;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   }

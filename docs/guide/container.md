@@ -37,10 +37,7 @@ order: 3
 
 ![设备挂载](./screenshots/mount.jpg)
 
-#### 1.1.2 内外网地址模板
-内外网地址支持模板格式，支持`PROTOCOL`、`HOST`、`PORT`参数。`PROTOCOL`、`HOST`为`iDocker`访问页地址的`protocol`和`host`。`PORT`为绑定给容器的第一个宿主机端口，可使用`PORTx`指定为第`x`个端口，例：`[PROTOCOL]//[HOST]:[PORT2]`
-
-#### 1.1.3 路径提示
+#### 1.1.2 路径提示
 为方便创建容器时填写路径，`iDocker`针对宿主机已挂载到`iDocker`容器内的路径可以进行提示
 
 ![路径提示](./screenshots/path-tips.png)
@@ -63,23 +60,11 @@ order: 3
 由于`compose`支持了更多基础模式和高级模式不支持的功能，所以只在基础模式和高级模式切换至`compose`模式时提示可将已填写数据转换成`compose`模式的配置，反向无法转换
 :::
 
-对应`iDocker`的一些特有功能，例如图标、内外网地址，可通过给容器添加`label`的形式添加，具体`label`如下：
-| label                      | 格式                                                                        |
-| -------------------------- | --------------------------------------------------------------------------- |
-| docker.idocker.icon        | url\|https://www.idocker.com/test.webp                                      |
-| docker.idocker.icon        | svg\|&lt;svg&gt;&lt;path d=&quot;M563.8 512l...512z&quot; /&gt;&lt;/svg&gt; |
-| docker.idocker.localUrl    | http://192.168.0.2:18080                                                    |
-| docker.idocker.internetUrl | https://www.idocker.com:18080                                               |
-
-::: tip 本地图片图标
-对于`compose`模式想使用本地图片作为图片，可先在普通模式上传图片后，点击预览图标然后在右键获取图片地址，然后填入`compose`模式的`label`：`docker.idocker.icon`中，==注意：如果想内外网都能显示该图片，需将图片在外网地址下进行上传==
-:::
-
 ## 二、管理容器
 容器列表页展示了所有已创建的容器，在列表页可对容器进行管理，在操作列现支持查看详情、查看日志、终端、编辑、启动、暂停、恢复、重启、停止、删除等操作
 
 ::: tip
-出于稳定性考虑，对于`iDocker`本身，只支持查看详情、日志、终端操作。对于非使用`iDocker`普通模式和高级模式创建的容器，不支持编辑操作。`compose`模式创建的容器不支持编辑，建议保存模版，后续通过删除容器使用模版并修改重新创建
+出于稳定性考虑，对于`iDocker`本身，只支持查看详情、日志、终端操作。对于非使用`iDocker`普通模式和高级模式创建的容器，编辑操作可能造成不兼容，请谨慎操作。`compose`模式创建的容器建议删除容器使用模版并修改重新创建
 :::
 
 ### 2.1 检查更新
